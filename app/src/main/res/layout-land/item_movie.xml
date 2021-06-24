@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/ivPoster"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -17,29 +17,49 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivPoster"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="0dp"
+        android:layout_marginEnd="15dp"
         android:layout_toEndOf="@+id/ivPoster"
+        android:ellipsize="end"
         android:fontFamily="sans-serif-black"
+        android:maxLines="1"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         tools:text="Sample Movie" />
 
-    <TextView
-        android:id="@+id/tvOverview"
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="5dp"
+        android:numStars="5"
+        android:progressTint="#FFEB3B"
+        android:rating="3.5"
+        android:secondaryProgressTint="#00000000" />
+
+    <TextView
+        android:id="@+id/tvOverview"
+        android:layout_width="361dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBar"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="-1dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="15dp"
         android:layout_toEndOf="@+id/ivPoster"
+        android:ellipsize="end"
+        android:maxLines="4"
         android:textColor="#FFFFFF"
         tools:text="Lorum ipsum dolor sit amet, test movie description goes here." />
 </RelativeLayout>
