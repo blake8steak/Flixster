@@ -26,6 +26,8 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import okhttp3.Headers;
 
@@ -36,8 +38,19 @@ public class DisplayActivity extends YouTubeBaseActivity {
     TextView movieDesc;
     TextView ratingNum;
     RatingBar movieStars;
-
     Movie movie;
+    ArrayList<String> videoResults;
+    String videoId;
+
+    public List<String> keysFromJsonArray(JSONArray videoJSONArr) throws JSONException {
+        List<String> videos = new ArrayList<>();
+        for(int i=0; i<videoJSONArr.length(); i++) {
+            Log.d("MOVIEAPI", "Got here, adding "+videoJSONArr.getJSONObject(i).getString("key"));
+            videos.add(videoJSONArr.getJSONObject(i).getString("key"));
+            videos.size();
+        }
+        return videos;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +73,8 @@ public class DisplayActivity extends YouTubeBaseActivity {
 
         //get correct movie preview
         final String TAG = "MOVIEAPI";
-        ArrayList<JSONObject> videoResults = new ArrayList();
+        videoResults = new ArrayList();
+        videoId = "";
         videoApiUrl = "https://api.themoviedb.org/3/movie/"+movie.getMovieId()+"/videos?api_key="+MainActivity.apiKey+"&language=en-US";
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(videoApiUrl, new JsonHttpResponseHandler() {
@@ -70,10 +84,29 @@ public class DisplayActivity extends YouTubeBaseActivity {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    //reason for using videoResults list:
-                    //may add support for additional videos returned from data in future
-                    videoResults.add(results.getJSONObject(0));
-                    Log.i(TAG, "Results: " + videoResults);
+                    Log.i(TAG, "Results: " + results.toString());
+                    videoResults.addAll((ArrayList<String>) keysFromJsonArray(results));
+                    videoId = videoResults.get(0);
+                    Log.i(TAG, "VideoKey: " + videoId);
+                    // resolve the player view from the layout
+                    YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
+
+                    // initialize with API key stored in secrets.xml
+                    playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
+                        @Override
+                        public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                                            YouTubePlayer youTubePlayer, boolean b) {
+                            // do any work here to cue video, play video, etc.
+                            youTubePlayer.cueVideo(videoId);
+                        }
+
+                        @Override
+                        public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                            YouTubeInitializationResult youTubeInitializationResult) {
+                            // log the error
+                            Log.e("MovieTrailerActivity", "Error initializing YouTube player");
+                        }
+                    });
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit json exception");
                     e.printStackTrace();
@@ -82,38 +115,7 @@ public class DisplayActivity extends YouTubeBaseActivity {
 
             @Override
             public void onFailure(int i, Headers headers, String s, Throwable throwable) {
-                Log.d(TAG, "Failed to get video.");
-            }
-        });
-
-        String videoId = "";
-        //set video key
-        try {
-            videoId = videoResults.get(0).getString("key");
-            Log.d(TAG, "Video key: "+videoId);
-        } catch(Exception e) {
-            Log.e(TAG, "Unable to retrieve video key."+videoResults.get(0));
-        }
-
-
-        // resolve the player view from the layout
-        YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
-
-        // initialize with API key stored in secrets.xml
-        String finalVideoId = videoId; //needed to resolve error of needing final id
-        playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider,
-                                                YouTubePlayer youTubePlayer, boolean b) {
-                // do any work here to cue video, play video, etc.
-                youTubePlayer.cueVideo(finalVideoId);
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                YouTubeInitializationResult youTubeInitializationResult) {
-                // log the error
-                Log.e("MovieTrailerActivity", "Error initializing YouTube player");
+                Log.d(TAG, "onFailure");
             }
         });
     }
