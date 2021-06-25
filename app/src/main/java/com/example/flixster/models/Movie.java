@@ -19,6 +19,7 @@ public class Movie {
     String posterPath;
     String title;
     String overview;
+    String movieId;
     float voteAvg;
 
     public Movie() {}
@@ -29,6 +30,11 @@ public class Movie {
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         voteAvg = (float) jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getString("id");
+    }
+
+    public String getMovieId() {
+        return movieId;
     }
 
     public float getVoteAvg() {
