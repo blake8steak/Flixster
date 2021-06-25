@@ -1,16 +1,12 @@
 package com.example.flixster.models;
 
-import android.content.Intent;
-
-import com.example.flixster.DisplayActivity;
-import com.example.flixster.MainActivity;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Parcel
@@ -19,6 +15,7 @@ public class Movie {
     String posterPath;
     String title;
     String overview;
+    String movieId;
     float voteAvg;
 
     public Movie() {}
@@ -29,6 +26,11 @@ public class Movie {
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         voteAvg = (float) jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getString("id");
+    }
+
+    public String getMovieId() {
+        return movieId;
     }
 
     public float getVoteAvg() {
