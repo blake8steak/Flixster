@@ -20,6 +20,7 @@
         android:paddingEnd="10dp"
         android:text="Movie 2: The Sequel"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold" />
 
@@ -32,6 +33,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="Lorum ipsum dolor sit amet, test example text 12345, example data here."
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <RatingBar
@@ -41,7 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="220dp"
-        android:numStars="10" />
+        android:numStars="10"
+        android:progressTint="#FFEB3B" />
 
     <TextView
         android:id="@+id/ratingNum"
@@ -53,5 +56,6 @@
         android:fontFamily="sans-serif-black"
         android:text="X.XX/10"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textStyle="bold" />
 </RelativeLayout>

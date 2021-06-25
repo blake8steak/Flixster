@@ -38,14 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //UI references
-        View mainView = findViewById(android.R.id.content);
-        ActionBar bar = getSupportActionBar();
-
-        //change color of ActionBar and view
-        bar.setBackgroundDrawable(new ColorDrawable(0x87110700));
-        mainView.setBackgroundColor(Color.DKGRAY);
-
         RecyclerView rvMovies = findViewById(R.id.rvMovies);
         movies = new ArrayList<>();
         MovieAdapter movieAdapter = new MovieAdapter(this, movies);
