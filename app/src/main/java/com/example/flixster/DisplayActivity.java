@@ -29,9 +29,14 @@ public class DisplayActivity extends AppCompatActivity {
         ratingNum = findViewById(R.id.ratingNum);
         movieStars = findViewById(R.id.movieStars);
 
-        getSupportActionBar().setTitle("Movie");
-
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
         Log.d("MovieDetailsActivity", String.format("Movie data for '%s'", movie.getTitle()));
+
+        getSupportActionBar().setTitle(movie.getTitle());
+        movieTitle.setText(movie.getTitle());
+        movieDesc.setText(movie.getOverview());
+        ratingNum.setText(movie.getVoteAvg()+" / 10");
+        movieStars.setRating(movie.getVoteAvg());
+
     }
 }
