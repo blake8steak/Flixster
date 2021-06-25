@@ -41,6 +41,7 @@ public class DisplayActivity extends YouTubeBaseActivity {
     Movie movie;
     ArrayList<String> videoResults;
     String videoId;
+    YouTubePlayerView playerView;
 
     public List<String> keysFromJsonArray(JSONArray videoJSONArr) throws JSONException {
         List<String> videos = new ArrayList<>();
@@ -61,9 +62,9 @@ public class DisplayActivity extends YouTubeBaseActivity {
         movieDesc = findViewById(R.id.movieDesc);
         ratingNum = findViewById(R.id.ratingNum);
         movieStars = findViewById(R.id.movieStars);
+        playerView = (YouTubePlayerView) findViewById(R.id.player);
 
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
-        Log.d("MovieDetailsActivity", String.format("Movie data for '%s'", movie.getTitle()));
 
         //getSupportActionBar().setTitle(movie.getTitle());
         movieTitle.setText(movie.getTitle());
@@ -84,13 +85,8 @@ public class DisplayActivity extends YouTubeBaseActivity {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "Results: " + results.toString());
                     videoResults.addAll((ArrayList<String>) keysFromJsonArray(results));
                     videoId = videoResults.get(0);
-                    Log.i(TAG, "VideoKey: " + videoId);
-                    // resolve the player view from the layout
-                    YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
-
                     // initialize with API key stored in secrets.xml
                     playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
                         @Override
@@ -108,7 +104,7 @@ public class DisplayActivity extends YouTubeBaseActivity {
                         }
                     });
                 } catch (JSONException e) {
-                    Log.e(TAG, "Hit json exception");
+                    Log.e(TAG, "Hit JSON exception");
                     e.printStackTrace();
                 }
             }
