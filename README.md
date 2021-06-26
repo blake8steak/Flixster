@@ -24,7 +24,7 @@ The following **stretch** features are implemented:
 
 The following **additional** features are implemented:
 
-* [X] Added some extra elements to the UI (New color theme, 5 star rating bar in MainActivity, exact score out of 10 in detail view, other minor things)
+* [X] Added some extra elements to the UI (5 star rating bar in MainActivity, exact score out of 10 in detail view, new color theme, other minor things)
 
 ## Video Walkthrough
 
