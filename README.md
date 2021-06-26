@@ -43,7 +43,7 @@ Describe any challenges encountered while building the app.
 
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
 - [Glide](https://github.com/bumptech/glide) - Image loading and caching library for Android
-- [YouTube Player View] (https://developers.google.com/youtube/android/player/downloads/) - Library for playing YouTube videos
+- [YouTube Player View](https://developers.google.com/youtube/android/player/downloads/) - Library for playing YouTube videos
 
 ## License
 
