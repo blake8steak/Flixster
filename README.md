@@ -37,7 +37,13 @@ GIF created with [Kap](https://getkap.co/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Nothing too crazy! It wasn't too too bad.
+
+I have to say though that the Android Silulator on Mac in my experience has been really buggy. I've had a number of weird errors/other issues be resolved by restarting/wiping data from the simulator, and it just seems to run slow for me. In my experience with iOS development in Xcode, the iPhone silumator is much more responsive and doesn't have to constantly be wiped and rebooted the way the Android silumator does.
+
+Other than that, the biggest challenge is mostly just that Android development is a new skill for me - this is the second Java Android app I've ever made (the first being the SimpleTodo) and I feel that now that i've learned a lot from this experience, I'll be able to do many of these things much easier moving forward now that I've learned them.
+
+Excited for the next two projects!
 
 ## Open-source libraries used
 
